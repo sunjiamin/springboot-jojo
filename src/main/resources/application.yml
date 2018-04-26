@@ -17,6 +17,10 @@ spring:
       max-wait: 60000
     database: 0 #默认是索引为的0的数据库
 
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+
 logging:
   level:
     com.sun.jojo.controller: 'on'
