@@ -1,5 +1,7 @@
 package com.sun.jojo.base64;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.HashMap;
@@ -19,5 +21,13 @@ public class Base64s {
         ConcurrentHashMap<String, String> concurrentHashMap = new ConcurrentHashMap<String, String>();
         //concurrentHashMap.put()
         HashMap<String, String> hashMap = new HashMap<String, String>();
+
+
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        //加密"0"
+        String encode = bCryptPasswordEncoder.encode("0");
+        System.out.println(encode);
+
+
     }
 }

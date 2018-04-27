@@ -4,6 +4,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -14,19 +16,40 @@ import java.util.List;
  * @author sunjiamin
  * @date 2018-04-26 11:07
  */
-public class SysUser implements UserDetails{
+@Entity
+@Table(name = "users")
+public class UserEntity implements Serializable,UserDetails{
 
-    private List<SysRole> roles;
 
+
+    @Id
+    @Column(name = "u_id")
     private Long id;
+
+    @Column(name = "u_username")
     private String username;
+
+    @Column(name = "u_password")
     private String password;
 
-    public List<SysRole> getRoles() {
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = {
+                    @JoinColumn(name = "ur_user_id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "ur_role_id")
+            }
+    )
+    private List<RoleEntity> roles;
+
+
+    public List<RoleEntity> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<SysRole> roles) {
+    public void setRoles(List<RoleEntity> roles) {
         this.roles = roles;
     }
 
@@ -49,8 +72,8 @@ public class SysUser implements UserDetails{
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> auths = new ArrayList<>();
-        List<SysRole> roles = this.getRoles();
-        for (SysRole role : roles) {
+        List<RoleEntity> roles = this.getRoles();
+        for (RoleEntity role : roles) {
             auths.add(new SimpleGrantedAuthority(role.getName()));
         }
         return auths;

@@ -14,14 +14,14 @@ import java.io.PrintWriter;
  * @author sunjiamin
  * @date 2018-04-24 17:11
  */
-@WebServlet(urlPatterns = "/testservlet")
-public class TestServlet extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-         resp.setContentType("application/json");
-         resp.setCharacterEncoding("utf-8");
-        PrintWriter writer = resp.getWriter();
-        writer.write("test servlet write...");
-        writer.close();
-    }
-}
+//@WebServlet(urlPatterns = "/testservlet")
+//public class TestServlet extends HttpServlet {
+//    @Override
+//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//         resp.setContentType("application/json");
+//         resp.setCharacterEncoding("utf-8");
+//        PrintWriter writer = resp.getWriter();
+//        writer.write("test servlet write...");
+//        writer.close();
+//    }
+//}

@@ -15,7 +15,7 @@ import java.util.List;
  * @date 2018-04-25 17:30
  */
 @Service
-@CacheConfig(cacheNames = "user")
+@CacheConfig(cacheNames = "users")
 public class PersonService {
     @Cacheable
     public List<Person> list()

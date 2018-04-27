@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script th:src="@{/static/js/jquery-3.3.1.js}"></script>
+    <script th:src="@{/static/js/app.js}"></script>
+ 
 </head>
 <body>
 
 this is home page,you are super admin
+<img th:src="@{/static/img/timg.jpeg}">
 </body>
 </html>

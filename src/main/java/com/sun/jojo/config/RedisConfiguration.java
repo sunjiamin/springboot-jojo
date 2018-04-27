@@ -67,7 +67,7 @@ public class RedisConfiguration extends CachingConfigurerSupport {
     }
 
     /**
-     * @Description: 防止redis入库序列化乱码的问题
+     * Description: 防止redis入库序列化乱码的问题
      * @return     返回类型
      * @date 2018/4/12 10:54
      */
