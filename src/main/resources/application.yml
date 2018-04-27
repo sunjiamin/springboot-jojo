@@ -22,7 +22,7 @@ spring:
       driver-class-name: com.mysql.jdbc.Driver
       url: jdbc:mysql://127.0.0.1:3306/user?characterEncoding=utf8&useSSL=false
       username: root
-      password: 19910902
+      password: XXX
   thymeleaf:
     #在构建URL时添加到视图名称前的前缀
     prefix: classpath:/templates/
@@ -33,6 +33,7 @@ spring:
   jpa:
     show-sql: true
     hibernate:
+      #可以根据实体自动创建表
       ddl-auto: update
 #  mvc:
 #    static-path-pattern: /**
