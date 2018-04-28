@@ -1,4 +1,4 @@
-package com.sun.jojo.model;
+package com.sun.jojo.model.entity;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

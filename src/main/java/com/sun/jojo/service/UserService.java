@@ -1,15 +1,12 @@
 package com.sun.jojo.service;
 
-import com.sun.jojo.model.RoleEntity;
-import com.sun.jojo.model.UserEntity;
+import com.sun.jojo.model.entity.UserEntity;
 import com.sun.jojo.repository.UserJPA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
-import java.util.Arrays;
 
 /**
  * description:

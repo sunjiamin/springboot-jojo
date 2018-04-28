@@ -1,4 +1,4 @@
-package com.sun.jojo.model;
+package com.sun.jojo.model.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

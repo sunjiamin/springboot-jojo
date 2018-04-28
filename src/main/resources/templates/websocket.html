@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html   xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>web socket</title>
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap.min.css}"/>
+    <script th:src="@{/static/js/jquery-3.3.1.js}"></script>
+    <script th:src="@{/static/js/sockjs.min.js}"></script>
+    <script th:src="@{/static/js/stomp.min.js}"></script>
+    <style type="text/css">
+        body {
+            padding-top: 50px;
+        }
+
+        .starter-template {
+            padding: 40px 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body onload="disconnect()">
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">SpringBoot Web演示</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a th:href="@{/}">首页</a></li>
+                <li><a th:href="@{http://www.baidu.com}">百度</a></li>
+            </ul>
+        </div>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="starter-template">
+        <div>
+            <div>
+                <label>自    己ID：</label><input type="text" id="meId" /><br/>
+                <label>输入对方ID：</label><input type="text" id="sendToId" /><br/>
+                <button id="connect" onclick="connect();">连接</button>
+                <button id="disconnect" disabled="disabled" onclick="disconnect();">断开连接</button>
+            </div>
+            <div id="conversationDiv">
+                <label>输入消息：</label><input type="text" id="name" /><br/>
+
+                <button id="sendName" onclick="sendName();">发送</button>
+                <p id="response"></p>
+                <p id="response1"></p>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <script>
+      var stompClient = null;
+      //接收消息方ID
+      //var userId = $("#sendToId").val(); //'d892bf12bf7d11e793b69c5c8e6f60fb';//[[${userId}]];
+
+      function setConnected(connected) {
+          document.getElementById('connect').disabled = connected;
+          document.getElementById('disconnect').disabled = !connected;
+          document.getElementById('conversationDiv').style.visibility = connected ? 'visible' : 'hidden';
+          $('#response').html();
+      }
+
+      function connect() {
+          var meId = $("#meId").val();
+          var userId = $("#sendToId").val();
+          var socket = new SockJS('/endpointWisely'); //1连接SockJS的endpoint是“endpointWisely”，与后台代码中注册的endpoint要一样。
+          stompClient = Stomp.over(socket);//2创建STOMP协议的webSocket客户端。
+          stompClient.connect({}, function(frame) {//3连接webSocket的服务端。
+              setConnected(true);
+              console.log('开始进行连接Connected: ' + frame);
+              //4通过stompClient.subscribe（）订阅服务器的目标是'/topic/getResponse'发送过来的地址，与@SendTo中的地址对应。
+              stompClient.subscribe('/topic/getResponse', function(respnose){
+                  showResponse(JSON.parse(respnose.body).responseMessage);
+              });
+              //4通过stompClient.subscribe（）订阅服务器的目标是'/user/' + userId + '/msg'接收一对一的推送消息,其中userId由服务端传递过来,用于表示唯一的用户,通过此值将消息精确推送给一个用户
+              stompClient.subscribe('/user/' + userId + '/msg', function(respnose){
+                  console.log(respnose);
+                  showResponse1(JSON.parse(respnose.body).responseMessage);
+              });
+          });
+      }
+
+
+      function disconnect() {
+          if (stompClient != null) {
+              stompClient.disconnect();
+          }
+          setConnected(false);
+          console.log("Disconnected");
+      }
+
+      function sendName() {
+          var meId = $("#meId").val();
+          var userId = $("#sendToId").val();
+          var name = $('#name').val();
+          //通过stompClient.send（）向地址为"/welcome"的服务器地址发起请求，与@MessageMapping里的地址对应。因为我们配置了registry.setApplicationDestinationPrefixes(Constant.WEBSOCKETPATHPERFIX);所以需要增加前缀/ws-push/
+          stompClient.send("/ws-push/welcome", {}, JSON.stringify({ 'name': name ,'sendToUserId' : userId,'currentUserId':meId}));
+      }
+
+      function showResponse(message) {
+          var response = $("#response");
+          response.html(message);
+      }
+      function showResponse1(message) {
+          var response = $("#response1");
+          response.html(message);
+      }
+  </script>
+
+</body>
+</html>

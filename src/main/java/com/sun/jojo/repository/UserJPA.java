@@ -1,6 +1,6 @@
 package com.sun.jojo.repository;
 
-import com.sun.jojo.model.UserEntity;
+import com.sun.jojo.model.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

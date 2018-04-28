@@ -19,6 +19,7 @@ public class MVCConfig  extends WebMvcConfigurationSupport {
     protected void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/login").setViewName("login");
         registry.addViewController("/home").setViewName("home");
+        registry.addViewController("/websocket").setViewName("websocket");
     }
 
     @Override
