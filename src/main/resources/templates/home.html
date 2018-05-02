@@ -44,8 +44,19 @@
         <div sec:authorize="hasRole('ROLE_USER')">
             <p class="bg-info">无更多显示信息</p>
         </div>
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" class="btn btn-primary" value="注销"/>
+        <!--<form th:action="@{/logout}" method="post">-->
+            <!--<input type="submit" class="btn btn-primary" value="注销"/>-->
+        <!--</form>-->
+        <form class="form-signin" role="form" name="form" th:action="@{/submit}" action="/submit" method="post">
+            <div class="form-group">
+                <label for="person.name">姓名</label>
+                <input type="text" class="form-control" name="person.name" value="" placeholder="姓名"/>
+            </div>
+            <div class="form-group">
+                <label for="person.age">年龄</label>
+                <input type="password" class="form-control" name="person.age" placeholder="年龄"/>
+            </div>
+            <input type="submit" id="login" value="Login" class="btn btn-primary"/>
         </form>
     </div>
 </div>

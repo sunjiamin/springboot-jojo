@@ -1,5 +1,6 @@
 package com.sun.jojo.controller;
 
+import com.sun.jojo.annotation.ParameterModel;
 import com.sun.jojo.model.Msg;
 import com.sun.jojo.model.Person;
 import org.slf4j.Logger;
@@ -30,8 +31,11 @@ public class IndexController {
         return "home";
     }
 
-//    @RequestMapping(value = "/login")
-//    public String login(){
-//        return "home";
-//    }
+
+    @RequestMapping(value = "/submit")
+    public   String submit(@ParameterModel Person person){
+
+        return person.toString();
+    }
+
 }

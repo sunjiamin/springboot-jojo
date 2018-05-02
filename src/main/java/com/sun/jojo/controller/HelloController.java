@@ -39,6 +39,15 @@ public class HelloController  {
     private PersonService personService;
 
     /**
+     * 测试跨域访问
+     * @return
+     */
+    @RequestMapping(value = "/cors")
+    public  String  cors(){
+        return "测试跨域访问";
+    }
+
+    /**
      * logback
      */
     private final static Logger logger = LoggerFactory.getLogger(HelloController.class);
