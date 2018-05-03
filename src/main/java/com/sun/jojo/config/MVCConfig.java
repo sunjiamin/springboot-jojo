@@ -30,11 +30,6 @@ public class MVCConfig  extends WebMvcConfigurationSupport {
 
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        registry.addResourceHandler("/static/image/**").addResourceLocations("classpath:/static/image/");
-//        registry.addResourceHandler("/static/js/**").addResourceLocations("classpath:/static/js/");
-//        registry.addResourceHandler("/static/css/**").addResourceLocations("classpath:/static/css/");
-//        registry.addResourceHandler("/static/html/**").addResourceLocations("classpath:/static/html/");
-
         /**
          * 配置静态资源访问
          * 第一种：如下代码

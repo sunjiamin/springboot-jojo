@@ -23,8 +23,6 @@ import java.lang.reflect.Method;
 @Configuration
 @EnableCaching
 public class RedisConfiguration extends CachingConfigurerSupport {
-
-
     /**
      * 自定义生成key的规则
      * @return
