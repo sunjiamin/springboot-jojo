@@ -1,7 +1,12 @@
+#通用环境配置
 server:
-  port: 9090
+  port: 9098
 
 spring:
+  #激活Profile配置
+  profiles:
+    active: dev
+  #http配置
   http:
     multipart:
       max-file-size: 1024Mb
@@ -16,35 +21,35 @@ spring:
       max-active: 20
       max-wait: 60000
     database: 0 #默认是索引为的0的数据库
-
+  #数据源配置
   datasource:
       type: com.alibaba.druid.pool.DruidDataSource
       driver-class-name: com.mysql.jdbc.Driver
       url: jdbc:mysql://127.0.0.1:3306/user?characterEncoding=utf8&useSSL=false
       username: root
       password: 19910902
+  #视图模版引擎配置
   thymeleaf:
     #在构建URL时添加到视图名称前的前缀
     prefix: classpath:/templates/
     #在构建URL时添加到视图名称后的后缀
     suffix: .html
     cache: false
-
+  #jpa配置
   jpa:
     show-sql: true
     hibernate:
       #可以根据实体自动创建表
       ddl-auto: update
-#  mvc:
-#    static-path-pattern: /**
-#  resources:
-#    static-locations: classpath:/templates/,classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
 
 
 logging:
   level:
     com.sun.jojo.controller: 'on'
 
+
+autoconfigtest:
+  msg: 'jojo'
 
 
 

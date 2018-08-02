@@ -1,5 +1,6 @@
 package com.sun.jojo.controller;
 
+import com.sun.jojo.config.autoconfig.AutoConfigTestService;
 import com.sun.jojo.model.Person;
 import com.sun.jojo.service.PersonService;
 import org.slf4j.Logger;
@@ -29,7 +30,7 @@ import java.util.UUID;
  * @date 2018-04-24 15:43
  */
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/xboot")
 public class HelloController  {
 
     @Autowired
@@ -37,6 +38,9 @@ public class HelloController  {
 
     @Autowired
     private PersonService personService;
+
+    @Autowired
+    AutoConfigTestService autoConfigTestService;
 
     /**
      * 测试跨域访问
@@ -52,8 +56,21 @@ public class HelloController  {
      */
     private final static Logger logger = LoggerFactory.getLogger(HelloController.class);
 
+    @RequestMapping(value = "autoconfig")
+    public   String autoConfig(){
+        return autoConfigTestService.say();
+    }
+
     @RequestMapping(value = "hello")
     public   Person sayHello(@Valid @RequestBody Person person, BindingResult result){
+        logger.debug("记录debug日志");
+        logger.info("访问了index方法");
+        logger.error("记录error错误日志");
+        return person;
+    }
+
+    @PostMapping(value = "/postPerson")
+    public   Person postPerson( Person person  ){
         logger.debug("记录debug日志");
         logger.info("访问了index方法");
         logger.error("记录error错误日志");

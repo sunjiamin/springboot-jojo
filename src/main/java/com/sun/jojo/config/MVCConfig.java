@@ -24,7 +24,7 @@ public class MVCConfig  extends WebMvcConfigurationSupport {
 
     @Override
     protected void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/login").setViewName("login");
+       // registry.addViewController("/login").setViewName("login");
         registry.addViewController("/websocket").setViewName("websocket");
     }
 
@@ -51,9 +51,9 @@ public class MVCConfig  extends WebMvcConfigurationSupport {
          *      如："http://www.baidu.com"，只有百度可以访问我们的跨域资源。
          *  allowedHeaders：允许所有的请求header访问，可以自定义设置任意请求头信息，如："X-YAUTH-TOKEN"
          */
-//       registry.addMapping("/**")
-//               .allowedMethods("*")
-//               .allowedOrigins("*")
-//               .allowedHeaders("*");
+       registry.addMapping("/**")
+               .allowedMethods("*")
+               .allowedOrigins("*")
+               .allowedHeaders("*");
     }
 }

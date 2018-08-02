@@ -1,8 +1,5 @@
 package com.sun.jojo.model.entity;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -18,7 +15,8 @@ import java.util.List;
  */
 @Entity
 @Table(name = "users")
-public class UserEntity implements Serializable,UserDetails{
+//public class UserEntity implements Serializable,UserDetails{
+    public class UserEntity implements Serializable{
 
 
 
@@ -69,42 +67,42 @@ public class UserEntity implements Serializable,UserDetails{
         this.password = password;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> auths = new ArrayList<>();
-        List<RoleEntity> roles = this.getRoles();
-        for (RoleEntity role : roles) {
-            auths.add(new SimpleGrantedAuthority(role.getName()));
-        }
-        return auths;
-    }
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        List<GrantedAuthority> auths = new ArrayList<>();
+//        List<RoleEntity> roles = this.getRoles();
+//        for (RoleEntity role : roles) {
+//            auths.add(new SimpleGrantedAuthority(role.getName()));
+//        }
+//        return auths;
+//    }
+//
+//    @Override
+//    public String getPassword() {
+//        return this.password;
+//    }
+//
+//    @Override
+//    public String getUsername() {
+//        return this.username;
+//    }
+//
+//    @Override
+//    public boolean isAccountNonExpired() {
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean isAccountNonLocked() {
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean isCredentialsNonExpired() {
+//        return true;
+//    }
 
-    @Override
-    public String getPassword() {
-        return this.password;
-    }
-
-    @Override
-    public String getUsername() {
-        return this.username;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
+    //@Override
     public boolean isEnabled() {
         return true;
     }
